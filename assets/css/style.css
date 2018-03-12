@@ -1,0 +1,9 @@
+.images{
+    width:200px;
+    height: 200px;
+    float: left;
+    margin: 10px;
+}
+#animal-view{
+    float: left;
+}
