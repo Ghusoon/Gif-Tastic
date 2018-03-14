@@ -1,9 +1,11 @@
 
 $( document ).ready(function() {
-var animals =["cats","dogs","bird","fish"];
+var animals =["Cats","Dogs","Bird","Fish","Bear","Lion","Horse","Pig","Goose","wolf","Giraffe"
+             ,"Tiger","Deer","Squirrel","Sheep","Duck","Raccoon","cheetah","Otter","Armadillo"];
 //----------------------------------------------------
+// Function that displays all gif buttons
 function renderButtons(){
-   $("#animal-view").empty();
+   $("#animal-view").empty(); // erasing anything in this div id so that it doesnt duplicate the results
 
     for( var i=0 ;i<animals.length;i++){
 
@@ -17,6 +19,7 @@ function renderButtons(){
     }
 }
 //----------------------------------------------------
+// Function to add a new animal button
 $("#add-animal").on("click",function(event){
     event.preventDefault();
 
@@ -36,6 +39,7 @@ $("animalButton").on("click",function(){
 
 });
 //--------------------------------------------------------
+// Function that displays all of the gifs
 $(document).on("click", "button",function(){
 var animal = $(this).attr("data-animal");
 
@@ -52,16 +56,20 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
 
               for(var i=0; i< results.length; i++){
 
-                  var animalDiv = $("<div>");
-                  var p = $("<p>").text("Rating: " + results[i].rating);
+                  var animalDiv = $("<div class='animalDiv'>");
+                  var p2 = $("<p class='title'>").text( results[i].title);
+                  var p = $("<p class='title'>").text("Rating: " + results[i].rating);
 
                   var animalImage = $("<img>").attr("src",results[i].images.fixed_height_still.url);
+                   // still image stored into src of image
                   animalImage.attr("data-still",results[i].images.fixed_height_still.url);
                   animalImage.attr("data-animate",results[i].images.fixed_height.url);
                   animalImage.attr("data-state","still");
                   animalImage.addClass("images")
                   
 
+                  
+                  animalDiv.append(p2);
                   animalDiv.append(p);
                   animalDiv.append(animalImage);
                   $("#animal-div").append(animalDiv);
@@ -72,6 +80,7 @@ var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
           
 
         });
+        // Document Event Listeners for state and animate.
         $(document).on("click","img", function(){
 
             var state = $(this).attr("data-state");
